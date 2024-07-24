@@ -1,0 +1,17 @@
+{% load component_tags %}
+
+<!doctype html>
+<html>
+<head>
+  <title>Dwhite Gudang {{ title }}</title>
+  {% component "cssbase" %}{% endcomponent %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  {% component_css_dependencies %}
+</head>
+<body>
+  {{ slot }}
+  {% component_js_dependencies %}
+</body>
+</html>
