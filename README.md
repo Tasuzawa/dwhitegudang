@@ -9,6 +9,9 @@ Aplikasi untuk memudahkan :
 
 ## Logs
 
+🚨📢 **Version 0.0.4**
+- fix navigation sidebar
+
 🚨📢 **Version 0.0.3**
 - add layout sidebar
 - Add navigation 
