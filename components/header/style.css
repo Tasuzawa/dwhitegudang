@@ -591,3 +591,7 @@
     }
   }
     
+  .text-amber-600 {
+    --tw-text-opacity: 1;
+    color: rgb(217 119 6 / var(--tw-text-opacity));
+  }
