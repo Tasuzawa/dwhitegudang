@@ -7,3 +7,8 @@ class Header(component.Component):
 
     class Media:
         css = "header/style.css"
+        
+        
+@component.register("sidebar")
+class sidebar(component.Component):
+    template_name = "sidebar.html"

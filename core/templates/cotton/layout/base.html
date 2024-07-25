@@ -5,14 +5,20 @@
 <head>
   <title>Dwhite Gudang {{ title }}</title>
   {% component "cssbase" %}{% endcomponent %}
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  {% component "favicon" %}{% endcomponent %}
   
   {% component_css_dependencies %}
 </head>
 <body>
+
   {{ slot }}
+
   {% component "jsbase" %}{% endcomponent %}
+  
   {% component_js_dependencies %}
 </body>
 </html>
