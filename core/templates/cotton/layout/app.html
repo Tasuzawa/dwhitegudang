@@ -1,11 +1,12 @@
 <c-layout.container title={{ title }}>
-	<c-slot name="navbar">
-
+	<c-slot name="header">
+		<c-components.header />
 	</c-slot>
-	<main>
+	<main  class="container-content">
+		<div class="content">
 		{{ slot }}
+		</div>
 	</main>
 	<c-slot name="footer">
-
 	</c-slot>
 </c-layout.container>

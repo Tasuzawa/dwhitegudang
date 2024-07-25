@@ -9,6 +9,10 @@ Aplikasi untuk memudahkan :
 
 ## Logs
 
+🚨📢 **Version 0.0.2**
+- add layout
+- Add header navigations, aside and content
+
 🚨📢 **Version 0.0.1**
 - tambah halaman home wellcome
 - tambah database postgresql v15

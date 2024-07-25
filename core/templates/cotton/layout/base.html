@@ -12,6 +12,7 @@
 </head>
 <body>
   {{ slot }}
+  {% component "jsbase" %}{% endcomponent %}
   {% component_js_dependencies %}
 </body>
 </html>
