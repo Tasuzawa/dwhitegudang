@@ -9,6 +9,9 @@ Aplikasi untuk memudahkan :
 
 ## Logs
 
+🚨📢 **Version 0.0.5**
+- change color icon
+
 🚨📢 **Version 0.0.4**
 - fix navigation sidebar
 
