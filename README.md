@@ -9,6 +9,9 @@ Aplikasi untuk memudahkan :
 
 ## Logs
 
+🚨📢 **Version 0.0.7**
+- test folder upload produk 
+
 🚨📢 **Version 0.0.6**
 - add tabel produk,brand dan kategori
 - install pillow
