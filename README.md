@@ -9,6 +9,10 @@ Aplikasi untuk memudahkan :
 
 ## Logs
 
+🚨📢 **Version 0.0.6**
+- add tabel produk,brand dan kategori
+- install pillow
+
 🚨📢 **Version 0.0.5**
 - change color icon
 
