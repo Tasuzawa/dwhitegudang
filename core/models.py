@@ -22,7 +22,7 @@ def produk_image_path(instance, filename):
     nama_file = slugify(instance.nama_produk)
     ext = filename.split('.')[-1]
     filename = f'{nama_file}.{ext}'
-    return f'media/produk_gambar/{instance.produk_id}/{filename}'
+    return f'produk_gambar/{instance.produk_id}/{filename}'
 
 
 class Produk(models.Model):

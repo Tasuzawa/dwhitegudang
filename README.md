@@ -9,6 +9,9 @@ Aplikasi untuk memudahkan :
 
 ## Logs
 
+🚨📢 **Version 0.0.8**
+- fixed image media file
+
 🚨📢 **Version 0.0.7**
 - test folder upload produk 
 
