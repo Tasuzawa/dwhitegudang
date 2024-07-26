@@ -4,3 +4,6 @@ from .models import *
 admin.site.register(Produk)
 admin.site.register(Kategori)
 admin.site.register(Brand)
+admin.site.register(Gudang)
+admin.site.register(Staff)
+admin.site.register(AksesStaf)

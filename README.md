@@ -9,6 +9,9 @@ Aplikasi untuk memudahkan :
 
 ## Logs
 
+🚨📢 **Version 0.0.9**
+- penambahan tabel gudang dan staff
+
 🚨📢 **Version 0.0.8**
 - fixed image media file
 

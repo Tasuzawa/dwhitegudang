@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from django.utils.text import slugify
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Kategori(models.Model):
@@ -39,4 +40,51 @@ class Produk(models.Model):
     
     def __str__(self):
         return self.nama_produk
+
+
+class Gudang(models.Model):
+    gudang_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    nama_gudang = models.CharField(max_length=255)
+    alamat = models.TextField()
+    lokasi = models.CharField(max_length=255)
+    jenis = models.CharField(max_length=255, choices=[
+        ('pusat', 'Gudang Pusat'),
+        ('cabang', 'Gudang Cabang'),
+    ])
+    tanggal_dibuat = models.DateTimeField(auto_now_add=True)
+    gudang_pusat = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
     
+    def __str__(self):
+        return self.nama_gudang
+
+
+def staf_image_path(instance, filename):
+    nama_file = slugify(instance.nama_staff)
+    ext = filename.split('.')[-1]
+    filename = f'{nama_file}.{ext}'
+    return f'staf_gambar/foto_profile/{instance.staff_id}/{filename}'
+
+    
+class Staff(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    staff_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    foto_profile = models.ImageField(upload_to=staf_image_path)
+    nama_staff = models.CharField(max_length=255)
+    nomor_telepon = models.CharField(max_length=20)
+    tanggal_masuk = models.DateField()
+    gudang = models.ManyToManyField(Gudang, through='AksesStaf')
+    
+    def __str__(self):
+        return self.nama_staff
+    
+    
+# Suggested code may be subject to a license. Learn more: ~LicenseLog:3579031129.
+class AksesStaf(models.Model):
+    akses_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    staff = models.ForeignKey(Staff, on_delete=models.CASCADE)
+    gudang = models.ForeignKey(Gudang, on_delete=models.CASCADE)
+    dapat_akses = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return f'{self.staff.nama_staff} - {self.gudang.nama_gudang}'
