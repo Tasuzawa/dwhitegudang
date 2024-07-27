@@ -9,7 +9,7 @@ Aplikasi untuk memudahkan :
 
 ## Logs
 
-🚨📢 **Version 0.0.9**
+🚨📢 **Version 0.1.0**
 - penambahan tabel inventory, aktivitasgudang dan stok
 - membuat supaya terukur dan pengurangan automatis oleh sistem
 
