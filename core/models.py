@@ -145,7 +145,7 @@ class Stok(models.Model):
     lokasi_rak = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
-        return self.inventory
+        return f'{self.inventory}'
     
     
 class AktivitasGudang(models.Model):
