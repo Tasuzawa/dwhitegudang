@@ -22,7 +22,7 @@ def produk_image_path(instance, filename):
     ext = filename.split('.')[-1]
     filename = f'{nama_file}.{ext}'
     
-    return f'produk_gambar/{instance.produk_id}/{filename}'
+    return f'produk/{instance.produk_id}/{filename}'
         
 
 def staf_image_path(instance, filename):
@@ -30,4 +30,12 @@ def staf_image_path(instance, filename):
     ext = filename.split('.')[-1]
     filename = f'{nama_file}.{ext}'
     
-    return f'staf_gambar/foto_profile/{instance.staff_id}/{filename}'
+    return f'staf/foto_profile/{instance.staff_id}/{filename}'
+
+
+def order_resi_pdf_path(instance, filename):
+    nama_file = slugify(instance.nomor_resi)
+    ext = filename.split('.')[-1]
+    filename = f'{nama_file}.{ext}'
+    
+    return f'order/{instance.order_id}/resi/{filename}'

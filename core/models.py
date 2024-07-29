@@ -6,7 +6,7 @@ from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 
 # function Models
-from  core.utils import produk_image_path, staf_image_path, update_stok_aktual_inventory
+from  core.utils import *
 
 # Create your models here.
 class Kategori(models.Model):
@@ -170,7 +170,7 @@ class TokoOnlineShop(models.Model):
     penanggung_jawab = models.CharField(max_length=255)
     
     def __str__(self):
-        return self.nama_toko
+        return f'{self.online_shop}-{self.nama_toko}'
     
 class LokasiToko(models.Model):
     lokasi_toko_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -178,7 +178,7 @@ class LokasiToko(models.Model):
     gudang = models.ForeignKey(Gudang, on_delete=models.CASCADE)
     
     def __str__(self):
-        return f'{self.toko_online_shop.nama_toko} - {self.gudang.nama_gudang}'
+        return f'{self.toko_online_shop} - {self.gudang}'
 
     
     
@@ -196,9 +196,9 @@ class Order(models.Model):
         ('transfer', 'Transfer Bank'),
     ])
     produk = models.ManyToManyField(Inventory, through='OrderItem')
+    total_qty = models.PositiveIntegerField(editable=False)
     total_pembayaran = models.DecimalField(max_digits=10, decimal_places=0)
     ongkos_kirim = models.DecimalField(max_digits=10, decimal_places=0)
-    qty_produk = models.PositiveIntegerField()
     tanggal_order = models.DateTimeField(auto_now_add=True, editable=False)
     tanggal_selesai = models.DateTimeField(null=True, blank=True, editable=False)
     status = models.CharField(max_length=50, choices=[
@@ -210,16 +210,18 @@ class Order(models.Model):
         ('dibatalkan', 'Dibatalkan'),
         ('retur','retur'),
     ], default='pending', editable=False)
+    resi = models.FileField(upload_to=order_resi_pdf_path)
+    
     
     def __str__(self):
-        return f'{self.nama_customer} - {self.produk} - {self.toko}'
+        return f'{self.nama_customer} - {self.toko}'
     
 
 class OrderItem(models.Model):
     order_item_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     produk = models.ForeignKey(Inventory, on_delete=models.CASCADE)
-    jumlah = models.PositiveIntegerField()
+    qty = models.PositiveIntegerField()
     
     def __str__(self):
-        return f'{self.order.nama_customer}-{self.produk.nama_produk}-{self.jumlah}'
+        return f'{self.order}-{self.produk}-{self.jumlah}'

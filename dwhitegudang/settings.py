@@ -98,11 +98,14 @@ WSGI_APPLICATION = 'dwhitegudang.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'verceldb', 
-        'USER': 'default',
-        'PASSWORD': '2RnLwT8EdlWH',
-        'HOST': 'ep-black-bush-a101g8y9-pooler.ap-southeast-1.aws.neon.tech', 
+        'NAME': 'devdb', 
+        'USER': 'devdb_owner',
+        'PASSWORD': 'Nz1J4jfVlCra',
+        'HOST': 'ep-green-sunset-a1341the.ap-southeast-1.aws.neon.tech', 
         'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require',
+        },
     }
 }
 
