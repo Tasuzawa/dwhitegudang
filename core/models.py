@@ -191,7 +191,7 @@ class Order(models.Model):
     nomor_telepon = models.CharField(max_length=20)
     alamat = models.TextField()
     kota_kecamatan = models.CharField(max_length=500)
-    metode_pembayaran = models.CharField(max_lenght=50, choices=[
+    metode_pembayaran = models.CharField(max_length=255, choices=[
         ('cod', 'Cash On Delivery'),
         ('transfer', 'Transfer Bank'),
     ])
@@ -222,4 +222,4 @@ class OrderItem(models.Model):
     jumlah = models.PositiveIntegerField()
     
     def __str__(self):
-        return self.order.nama_customer
+        return f'{self.order.nama_customer}-{self.produk.nama_produk}-{self.jumlah}'
