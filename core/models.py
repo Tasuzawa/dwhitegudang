@@ -152,3 +152,74 @@ class AktivitasGudang(models.Model):
     
 # fungsi untuk mengatur stok secara automatis setelah menyimpan ke database
 post_save.connect(update_stok_aktual_inventory, sender=AktivitasGudang)
+
+class OnlineShop(models.Model):
+    online_shop_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    nama_online_shop = models.CharField(max_length=255)
+    
+    def __str__(self):
+        return self.nama_online_shop
+    
+class TokoOnlineShop(models.Model):
+    toko_online_shop_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    online_shop = models.ForeignKey(OnlineShop, on_delete=models.CASCADE)
+    id_toko = models.CharField(max_length=255)
+    nama_toko = models.CharField(max_length=255)
+    alamat = models.TextField()
+    nomor_telepon = models.CharField(max_length=20)
+    penanggung_jawab = models.CharField(max_length=255)
+    
+    def __str__(self):
+        return self.nama_toko
+    
+class LokasiToko(models.Model):
+    lokasi_toko_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    toko_online_shop = models.ForeignKey(TokoOnlineShop, on_delete=models.CASCADE)
+    gudang = models.ForeignKey(Gudang, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f'{self.toko_online_shop.nama_toko} - {self.gudang.nama_gudang}'
+
+    
+    
+class Order(models.Model):
+    order_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    lokasi_kirim = models.ForeignKey(Gudang, on_delete=models.CASCADE) 
+    toko = models.ForeignKey(LokasiToko, on_delete=models.CASCADE)
+    nomor_resi = models.CharField(max_length=255)
+    nama_customer = models.CharField(max_length=255)
+    nomor_telepon = models.CharField(max_length=20)
+    alamat = models.TextField()
+    kota_kecamatan = models.CharField(max_length=500)
+    metode_pembayaran = models.CharField(max_lenght=50, choices=[
+        ('cod', 'Cash On Delivery'),
+        ('transfer', 'Transfer Bank'),
+    ])
+    produk = models.ManyToManyField(Inventory, through='OrderItem')
+    total_pembayaran = models.DecimalField(max_digits=10, decimal_places=0)
+    ongkos_kirim = models.DecimalField(max_digits=10, decimal_places=0)
+    qty_produk = models.PositiveIntegerField()
+    tanggal_order = models.DateTimeField(auto_now_add=True, editable=False)
+    tanggal_selesai = models.DateTimeField(null=True, blank=True, editable=False)
+    status = models.CharField(max_length=50, choices=[
+        ('pending', 'Pending'),
+        ('proses', 'Proses'),
+        ('siap', 'Siap Kirim'),
+        ('dikirim', 'Sudah Dikirim'),
+        ('selesai', 'Selesai'),
+        ('dibatalkan', 'Dibatalkan'),
+        ('retur','retur'),
+    ], default='pending', editable=False)
+    
+    def __str__(self):
+        return f'{self.nama_customer} - {self.produk} - {self.toko}'
+    
+
+class OrderItem(models.Model):
+    order_item_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    produk = models.ForeignKey(Inventory, on_delete=models.CASCADE)
+    jumlah = models.PositiveIntegerField()
+    
+    def __str__(self):
+        return self.order.nama_customer
