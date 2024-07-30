@@ -77,7 +77,7 @@ class Staff(models.Model):
     def __str__(self):
         return self.nama_staff
     
-post_save.connect(update_user_permission_bygrup, sender=User)
+post_save.connect(update_user_permission_bygrup, sender=Staff)
     
         
     

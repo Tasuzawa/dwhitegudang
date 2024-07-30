@@ -8,17 +8,16 @@ def update_user_permission_bygrup(sender, instance, created, **kwargs):
     """
     Memperbarui izin pengguna berdasarkan jabatannya.
 
-    Signal ini akan dijalankan ketika pengguna baru dibuat atau ketika field jabatan
-    pada model Staff diubah.
+    Signal ini akan dijalankan ketika objek Staff baru dibuat atau diubah.
     """
-    if created or hasattr(instance, 'staff') and instance.staff.jabatan:
-        jabatan = instance.staff.jabatan
+    if created or kwargs.get('update_fields') and 'jabatan' in kwargs['update_fields']:
+        jabatan = instance.jabatan
         if jabatan:
             # Hapus semua grup yang sudah ada
-            instance.groups.clear()
+            instance.user.groups.clear()
             # Tambahkan grup baru berdasarkan jabatan
-            instance.groups.add(jabatan.grup_auth)
-            instance.save()
+            instance.user.groups.add(jabatan.grup_auth)
+            instance.user.save()
 
 def update_order_total_qty(sender, instance, created, **kwargs):
     order = instance.order

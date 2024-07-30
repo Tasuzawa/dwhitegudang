@@ -92,18 +92,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'dwhitegudang.wsgi.application'
 
-
+load_dotenv()
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': getenv('PGDATABASE'),
-        'USER': getenv('PGUSER'),
-        'PASSWORD': getenv('PGPASSWORD'),
-        'HOST': getenv('PGHOST'),
-        'PORT': getenv('PGPORT', 5432),
+        'NAME': 'devdb',
+        'USER': 'devdb_owner',
+        'PASSWORD': 'vmxD9HdYMVy4',
+        'HOST': 'ep-snowy-bonus-a1f955at.ap-southeast-1.aws.neon.tech',
+        'PORT': '5432',
         'OPTIONS': {
             'sslmode': 'require',
         },
