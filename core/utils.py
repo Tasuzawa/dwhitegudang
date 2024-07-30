@@ -4,8 +4,21 @@ from django.db.models import Sum
 from core.models import *
 
 
+def update_user_permission_bygrup(sender, instance, created, **kwargs):
+    """
+    Memperbarui izin pengguna berdasarkan jabatannya.
 
-
+    Signal ini akan dijalankan ketika pengguna baru dibuat atau ketika field jabatan
+    pada model Staff diubah.
+    """
+    if created or hasattr(instance, 'staff') and instance.staff.jabatan:
+        jabatan = instance.staff.jabatan
+        if jabatan:
+            # Hapus semua grup yang sudah ada
+            instance.groups.clear()
+            # Tambahkan grup baru berdasarkan jabatan
+            instance.groups.add(jabatan.grup_auth)
+            instance.save()
 
 def update_order_total_qty(sender, instance, created, **kwargs):
     order = instance.order

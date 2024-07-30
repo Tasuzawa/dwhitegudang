@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+from os import getenv
+from dotenv import load_dotenv
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -98,11 +99,11 @@ WSGI_APPLICATION = 'dwhitegudang.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'devdb', 
-        'USER': 'devdb_owner',
-        'PASSWORD': 'whuPH6UVAEB8',
-        'HOST': 'ep-rough-scene-a1hiezwd.ap-southeast-1.aws.neon.tech', 
-        'PORT': '5432',
+        'NAME': getenv('PGDATABASE'),
+        'USER': getenv('PGUSER'),
+        'PASSWORD': getenv('PGPASSWORD'),
+        'HOST': getenv('PGHOST'),
+        'PORT': getenv('PGPORT', 5432),
         'OPTIONS': {
             'sslmode': 'require',
         },
