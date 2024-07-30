@@ -100,8 +100,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'devdb', 
         'USER': 'devdb_owner',
-        'PASSWORD': 'Nz1J4jfVlCra',
-        'HOST': 'ep-green-sunset-a1341the.ap-southeast-1.aws.neon.tech', 
+        'PASSWORD': 'whuPH6UVAEB8',
+        'HOST': 'ep-rough-scene-a1hiezwd.ap-southeast-1.aws.neon.tech', 
         'PORT': '5432',
         'OPTIONS': {
             'sslmode': 'require',

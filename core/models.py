@@ -196,7 +196,7 @@ class Order(models.Model):
         ('transfer', 'Transfer Bank'),
     ])
     produk = models.ManyToManyField(Inventory, through='OrderItem')
-    total_qty = models.PositiveIntegerField(editable=False)
+    total_qty = models.PositiveIntegerField(editable=False, default=0)
     total_pembayaran = models.DecimalField(max_digits=10, decimal_places=0)
     ongkos_kirim = models.DecimalField(max_digits=10, decimal_places=0)
     tanggal_order = models.DateTimeField(auto_now_add=True, editable=False)
@@ -224,4 +224,34 @@ class OrderItem(models.Model):
     qty = models.PositiveIntegerField()
     
     def __str__(self):
-        return f'{self.order}-{self.produk}-{self.jumlah}'
+        return f'{self.order}-{self.produk.produk}-{self.qty}'
+
+   
+post_save.connect(update_order_total_qty, sender=OrderItem)
+
+
+class Pelanggan(models.Model):
+    pelanggan_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    nama = models.CharField(max_length=255)
+    nomor_telepon = models.CharField(max_length=20)
+    alamat = models.TextField()
+    pesanan = models.ManyToManyField(Order)
+
+    def __str__(self):
+        return self.nama
+
+def create_or_update_pelanggan(sender, instance, created, **kwargs):
+    if created:
+        pelanggan, created = Pelanggan.objects.get_or_create(
+            nama=instance.nama_customer,
+            nomor_telepon=instance.nomor_telepon,
+            defaults={
+                'alamat': instance.alamat,
+            }
+        )
+        instance.pelanggan = pelanggan
+        instance.save()
+        
+        pelanggan.pesanan.add(instance)
+
+post_save.connect(create_or_update_pelanggan, sender=Order)

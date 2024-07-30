@@ -1,8 +1,17 @@
 from django.utils.text import slugify
-
+from django.db.models import Sum
 # Models
 from core.models import *
 
+
+
+
+
+def update_order_total_qty(sender, instance, created, **kwargs):
+    order = instance.order
+    order.total_qty = order.orderitem_set.aggregate(total_qty=Sum('qty'))['total_qty'] or 0
+    order.save()
+    
 
 def update_stok_aktual_inventory(sender, instance, created, **kwargs):
     if created:
