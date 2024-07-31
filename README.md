@@ -9,6 +9,9 @@ Aplikasi untuk memudahkan :
 
 ## Logs
 
+🚨📢 **Version 0.1.2**
+- penambahan form login dan register User
+
 🚨📢 **Version 0.1.1**
 - penambahan tabel online shop, toko online shop, lokasi toko, Order dan Pelanggan
 - membuat fungsi yang dibutuhkan untuk tambah data ke tabel ataupun merubah 

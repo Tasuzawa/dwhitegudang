@@ -4,6 +4,9 @@ from django.db.models import Sum
 from core.models import *
 
 
+
+
+
 def update_user_permission_bygrup(sender, instance, created, **kwargs):
     """
     Memperbarui izin pengguna berdasarkan jabatannya.

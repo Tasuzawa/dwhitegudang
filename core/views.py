@@ -12,3 +12,15 @@ def main(request):
     }
     
     return render(request,render_template,context)
+
+
+def UserLogin(request):
+    render_template = "login.html"
+    
+    return render(request,render_template)
+
+
+def UserRegister(request):
+    render_template = "register.html"
+    
+    return render(request,render_template)
