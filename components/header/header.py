@@ -12,3 +12,15 @@ class Header(component.Component):
 @component.register("sidebar")
 class sidebar(component.Component):
     template_name = "sidebar.html"
+    
+@component.register("user-avatar")
+class UserAvatar(component.Component):
+    template_name = "user-avatar.html"
+    
+
+@component.register("select-gudang")
+class SelectGudang(component.Component):
+    template_name = "select-gudang.html"
+    
+    class Media:
+        js = "select-gudang.js"

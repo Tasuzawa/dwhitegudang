@@ -8,6 +8,8 @@ Aplikasi untuk memudahkan :
 - Pendistribusian Laporan Barang
 
 ## Logs
+🚨📢 **Version 0.1.4**
+- fix Bug Layout header
 
 🚨📢 **Version 0.1.3**
 - fix Bug Layout
