@@ -1,0 +1,29 @@
+    <div class="hover:bg-amber-50 p-2 rounded-lg group relative flex gap-x-5">
+        <!-- Icon -->
+        <div class="relative group-last:after:hidden after:absolute after:top-8 after:bottom-2 after:start-3 after:w-px after:-translate-x-[0.5px] after:bg-gray-200">
+          <div class="relative z-10 size-6 flex justify-center items-center">
+            <c-libs.icon.rss />
+          </div>
+        </div>
+        <!-- End Icon -->
+    
+        <!-- Right Content -->
+        <div class="grow pb-8 group-last:pb-0">
+          <h3 class="mb-1 text-xs text-gray-600">
+            {{date}}
+          </h3>
+    
+          <p class="font-semibold text-sm text-gray-800">
+              {{title}}
+          </p>
+
+          <p class="mt-1 text-sm text-gray-600 dark:text-neutral-400">
+           {{content}}
+          </p>
+      
+          <ul class="list-disc ms-6 mt-3 space-y-1.5">
+            {{slot}}
+          </ul>
+        </div>
+        <!-- End Right Content -->
+      </div>

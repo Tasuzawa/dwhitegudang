@@ -9,6 +9,9 @@ Aplikasi untuk memudahkan :
 
 ## Logs
 
+🚨📢 **Version 0.1.3**
+- fix Bug Layout
+
 🚨📢 **Version 0.1.2**
 - penambahan form login dan register User
 
